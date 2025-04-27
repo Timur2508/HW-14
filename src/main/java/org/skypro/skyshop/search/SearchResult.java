@@ -24,6 +24,9 @@ public final class SearchResult {
     }
 
     public static Object fromSearchable(Searchable searchable) {
-        return null;
+        return new SearchResult(
+                searchable.getId().toString(),
+                searchable.getSearchTerm(),
+                searchable.getContentType());
     }
 }
