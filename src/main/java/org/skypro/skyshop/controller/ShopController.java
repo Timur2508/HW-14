@@ -1,26 +1,26 @@
 package org.skypro.skyshop.controller;
 
-import org.skypro.skyshop.basket.UserBasket;
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.service.StorageService;
 import org.skypro.skyshop.service.SearchService;
-import org.skypro.skyshop.service.BasketService;
+import org.skypro.skyshop.service.StorageService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/shop")
 public class ShopController {
     private final StorageService storageService;
     private final SearchService searchService;
-    private final BasketService basketService;
 
-    public ShopController(StorageService storageService, SearchService searchService, BasketService basketService) {
+    public ShopController(StorageService storageService, SearchService searchService) {
         this.storageService = storageService;
         this.searchService = searchService;
-        this.basketService = basketService;
     }
 
     @GetMapping("/products")
@@ -34,18 +34,14 @@ public class ShopController {
     }
 
     @GetMapping("/search")
-    public Collection<Object> search(@RequestParam("pattern") String pattern) {
+    public List<Object> search(@RequestParam("pattern") String pattern) {
         return searchService.search(pattern);
     }
 
-    @GetMapping("/basket/{id}")
-    public String addProductToBasket(@PathVariable("id") UUID id) {
-        basketService.addProductToBasket(id);
-        return "Продукт успешно добавлен";
-    }
-
-    @GetMapping("/basket")
-    public UserBasket getUserBasket() {
-        return basketService.getUserBasket();
+    @GetMapping("/products/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable UUID id) {
+        return storageService.getProductById(id)
+                .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

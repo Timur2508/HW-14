@@ -20,25 +20,15 @@ public class StorageService {
 
     private void initializeTestData() {
         // Добавление тестовых данных
-        UUID productId1 = UUID.randomUUID();
-        UUID productId2 = UUID.randomUUID();
-        UUID productId3 = UUID.randomUUID();
-        UUID productId4 = UUID.randomUUID();
-        UUID productId5 = UUID.randomUUID();
+        productStorage.put(UUID.randomUUID(), new Product(UUID.randomUUID(), "Книга hello", 10.99, false));
+        productStorage.put(UUID.randomUUID(), new Product(UUID.randomUUID(), "Футболка hello hello", 20.99, true));
+        productStorage.put(UUID.randomUUID(), new Product(UUID.randomUUID(), "Телефон", 500.00, false));
+        productStorage.put(UUID.randomUUID(), new Product(UUID.randomUUID(), "Ноутбук hello", 1000.00, false));
+        productStorage.put(UUID.randomUUID(), new Product(UUID.randomUUID(), "Планшет hello", 300.00, false));
 
-        productStorage.put(productId1, new Product(productId1, "Книга hello", 10.99, false));
-        productStorage.put(productId2, new Product(productId2, "Футболка hello hello", 20.99, true));
-        productStorage.put(productId3, new Product(productId3, "Телефон", 500.00, false));
-        productStorage.put(productId4, new Product(productId4, "Ноутбук hello", 1000.00, false));
-        productStorage.put(productId5, new Product(productId5, "Планшет hello", 300.00, false));
-
-        UUID articleId1 = UUID.randomUUID();
-        UUID articleId2 = UUID.randomUUID();
-        UUID articleId3 = UUID.randomUUID();
-
-        articleStorage.put(articleId1, new Article(articleId1, "hello Notebook hello", "Article"));
-        articleStorage.put(articleId2, new Article(articleId2, "hello", "Article"));
-        articleStorage.put(articleId3, new Article(articleId3, "hello world", "Article"));
+        articleStorage.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "hello Notebook hello", "Article"));
+        articleStorage.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "hello", "Article"));
+        articleStorage.put(UUID.randomUUID(), new Article(UUID.randomUUID(), "hello world", "Article"));
     }
 
     public Collection<Product> getAllProducts() {

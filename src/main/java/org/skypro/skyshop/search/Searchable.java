@@ -6,12 +6,13 @@ public interface Searchable {
 
     String getSearchTerm();
     String getContentType();
-    String getTitle();
     UUID getId(); // Добавленный метод
 
-    default String getStringRepresentation(Searchable searchable) {
-        return searchable.getSearchTerm() + " (" + searchable.getContentType() + ")";
+    default String getStringRepresentation() {
+        return getSearchTerm() + " (" + getContentType() + ")";
     }
+
+    String getTitle();
 
     int countOccurrences(String searchTerm, String search);
     boolean search(String query);

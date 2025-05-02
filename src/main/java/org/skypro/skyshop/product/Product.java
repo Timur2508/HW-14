@@ -53,7 +53,7 @@ public class Product implements Searchable, Comparable<Product> {
 
     @Override
     public int countOccurrences(String searchTerm, String search) {
-        String str = getStringRepresentation(this).toLowerCase(); // Исправлено
+        String str = getStringRepresentation().toLowerCase();
         String substr = search.toLowerCase();
         int count = 0;
         int index = 0;

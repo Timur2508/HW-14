@@ -7,12 +7,12 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Article implements Searchable, Comparable<Article> {
-    private final UUID id; // Добавленное поле
+    private final UUID id;
     private String title;
     private String contentType;
 
     public Article(UUID id, String title, String contentType) {
-        this.id = id; // Присваиваем значение id
+        this.id = id;
         this.title = title;
         this.contentType = contentType;
     }
@@ -40,7 +40,7 @@ public class Article implements Searchable, Comparable<Article> {
 
     @Override
     public int countOccurrences(String searchTerm, String search) {
-        String str = getStringRepresentation(this).toLowerCase(); // Исправлено
+        String str = getStringRepresentation().toLowerCase();
         String substr = search.toLowerCase();
         int count = 0;
         int index = 0;
